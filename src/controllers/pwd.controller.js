@@ -155,6 +155,7 @@ const addCard = async (req, res) => {
 
 // put
 const updatePwd = async (req,res) => {
+    const {id} = req.params;
     const {title,username,userpassword} = req.body;
 
     if (title == null || userpassword == null) {
@@ -165,7 +166,8 @@ const updatePwd = async (req,res) => {
         const connection = await getConnection();
         await connection
         .request()
-        .input('title',sq.VarChar,title)
+        .input('id',id)
+        .input('title',sql.VarChar,title)
         .input('username',sql.VarChar,username)
         .input('userpassword',sql.VarChar,userpassword)
         .query(querys.updatePwd);
